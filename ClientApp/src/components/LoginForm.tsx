@@ -50,12 +50,20 @@ LoginState > {
     onSubmit = (e : any) => {
         e.preventDefault();
         
+        const { email, password } = this.state;
+
         this.setState({
-            emailError: this.state.email === ''
+            emailError: email === ''
         });
         this.setState({
-            passwordError: this.state.password === ''
+            passwordError: password === ''
         });
+
+        const { emailError, passwordError } = this.state;
+
+        if (!emailError && !passwordError) {
+            this.props.login(email, password);
+        }
     }
 
     public render() {
